@@ -6,12 +6,13 @@ class Solution {
         for(int i=n-2;i>=0;i--)
         {
             maxvalue[i]=Math.max(maxvalue[i+1],prices[i]);
+
         }
         int ans=0;
         for(int i=0;i<prices.length;i++)
         {
-            int currpro=maxvalue[i]-prices[i];
-            ans=Math.max(ans,currpro);
+            int curr=maxvalue[i]-prices[i];
+            ans=Math.max(ans,curr);
         }
         return ans;
     }
