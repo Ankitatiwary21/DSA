@@ -12,6 +12,7 @@ class Solution {
         for(char c:stack)
         {
             sb.append(c);
+
         }
         return sb.toString();
     }
