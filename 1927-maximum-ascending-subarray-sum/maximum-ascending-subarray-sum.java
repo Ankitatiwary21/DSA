@@ -14,7 +14,7 @@ class Solution {
                 currmax=nums[i];
             }
         }
-           max=Math.max(max,currmax);
-           return max; 
+        max=Math.max(max,currmax);
+        return max;
     }
 }
