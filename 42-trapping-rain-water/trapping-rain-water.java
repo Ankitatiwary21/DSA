@@ -1,34 +1,27 @@
 class Solution {
-     public int[] getLeftMax(int[] height, int n) {
-        int[] leftMax = new int[n];
-        leftMax[0] = height[0];
-        for (int i = 1; i < n; i++) {
-            leftMax[i] = Math.max(leftMax[i - 1], height[i]);
+    public int trap(int[] h) {
+        int n = h.length;
+       int l=0,r=n-1;
+       int lm=0,rm=0,w=0;
+       while(l<r)
+       {
+        if(h[l]<h[r])
+        {
+            if(lm<=h[l])
+            lm=h[l];
+            else
+            w=w+(lm-h[l]);//how much can we store in current posiiton
+            l++;
         }
-        return leftMax;
-    }
-
-    public int[] getRightMax(int[] height, int n) {
-        int[] rightMax = new int[n];
-        rightMax[n - 1] = height[n - 1];
-        for (int i = n - 2; i >= 0; i--) {
-            rightMax[i] = Math.max(rightMax[i + 1], height[i]);
+        else
+        {
+            if(rm<=h[r])
+            rm=h[r];
+            else
+            w=w+(rm-h[r]);
+            r--;
         }
-        return rightMax;
-    }
-
-    public int trap(int[] height) {
-        int n = height.length;
-        if (n == 1 || n == 0)
-            return 0;
-        
-        int[] leftMax = getLeftMax(height, n);
-        int[] rightMax = getRightMax(height, n);
-
-        int sum = 0;
-        for (int i = 0; i < n; i++) {
-            sum += Math.min(leftMax[i], rightMax[i]) - height[i];
-        }
-        return sum;
+       }
+       return w;
     }
 }
