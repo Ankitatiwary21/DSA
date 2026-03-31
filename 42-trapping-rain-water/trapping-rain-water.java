@@ -1,27 +1,25 @@
 class Solution {
-    public int trap(int[] h) {
-        int n = h.length;
-       int l=0,r=n-1;
-       int lm=0,rm=0,w=0;
-       while(l<r)
-       {
-        if(h[l]<h[r])
+    public int trap(int[] height) {
+        int left=0;
+        int right=height.length-1;
+        int water=0;
+        int leftmax=height[left],rightmax=height[right];
+        while(left<right)
         {
-            if(lm<=h[l])
-            lm=h[l];
+            if(leftmax<rightmax)
+            {
+                left++;
+                leftmax=Math.max(leftmax,height[left]);
+                water+=leftmax-height[left];
+
+            }
             else
-            w=w+(lm-h[l]);//how much can we store in current posiiton
-            l++;
+            {
+                right--;
+                rightmax=Math.max(rightmax,height[right]);
+                water+=rightmax-height[right];
+            }
         }
-        else
-        {
-            if(rm<=h[r])
-            rm=h[r];
-            else
-            w=w+(rm-h[r]);
-            r--;
-        }
-       }
-       return w;
+        return water;
     }
 }
