@@ -8,41 +8,40 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution{
-    ListNode rev(ListNode head)
-    {
-        ListNode cur=head;
-        ListNode prev=null;
-        while(cur!=null)
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head==null || head.next==null)
         {
-            ListNode next=cur.next;
-            cur.next=prev;
-            prev=cur;
-            cur=next;
+            return true;
         }
-        return prev;
-    }
-public boolean isPalindrome(ListNode head) {
-  ListNode fast=head;
-  ListNode slow=head;
-  while(fast.next!=null && fast.next.next!=null)
-  {
-    fast=fast.next.next;
-    slow=slow.next;
-  }
-  ListNode secondhalf=slow.next;
-  slow.next=null;
-  secondhalf=rev(secondhalf);
-  while(secondhalf!=null)
-  {
-   if(head.val!=secondhalf.val)
-   {
-    return false;
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        ListNode prev=null;
+        while(slow!=null)
+        {
+            ListNode next=slow.next;
+            slow.next=prev;
+            prev=slow;
+            slow=next;
 
-   }
-   head=head.next;
-   secondhalf=secondhalf.next;
-  }
-  return true;
-}
+        }
+        ListNode left=head;
+        ListNode right=prev;
+        while(right!=null)
+        {
+            if(left.val!=right.val)
+            {
+                return false;
+            }
+            left=left.next;
+            right=right.next;
+        }
+        return true;
+
+    }
 }
